@@ -1,30 +1,46 @@
 page-home {
-
   ion-footer {
-      font-size: 0.7em;
-      color: #474747;
-      background-color: map-get($colors, light);
+    font-size: 0.7em;
+    color: #474747;
+    background-color: map-get($colors, light);
   }
 
   ion-item-sliding {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   .holding {
+    background-color: #f9f9f9;
+    text-transform: uppercase;
 
-      background-color: #f9f9f9;
-      text-transform: uppercase;
+    .holding-data {
+      font-size: 0.7em;
+    }
 
-      .holding-data {
-          font-size: 0.7em;
+    .results {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+
+      .value {
+        font-size: 1.2em;
+        color: map-get($colors, secondary);
+        margin-right: 10px;
       }
 
-  }
+      .profit {
+        color: $alt-green;
+        &::before {
+          content: '\2191';
+        }
+      }
 
-  .value {
-      margin-top: 10px;
-      font-size: 1.2em;
-      color: map-get($colors, secondary);
+      .loss {
+        color: $alt-red;
+        &::before {
+          content: '\2193';
+        }
+      }
+    }
   }
-
 }

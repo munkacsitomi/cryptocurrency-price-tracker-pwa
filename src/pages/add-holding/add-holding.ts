@@ -10,6 +10,19 @@ import { HoldingsProvider } from '../../providers/holdings/holdings';
     templateUrl: 'add-holding.html'
 })
 export class AddHoldingPage {
+    public allCryptoCodes = [{
+      name: 'Bitcoin',
+      code: 'BTC'
+    },
+    {
+      name: 'Litecoin',
+      code: 'LTC'
+    },
+    {
+      name: 'Ethereum',
+      code: 'ETH'
+    }];
+    public allDisplayCurrencies = ['USD', 'CAD', 'AUD', 'EUR'];
 
     private cryptoUnavailable: boolean = false;
     private checkingValidity: boolean = false;
