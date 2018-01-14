@@ -16,6 +16,8 @@ export class AddHoldingPage {
     private cryptoCode: string;
     private displayCurrency: string;
     private amountHolding;
+    private buyingDate: Date;
+    private initialBuyingPrice: number;
 
     constructor(private navCtrl: NavController, private holdingsProvider: HoldingsProvider) {
 
@@ -29,7 +31,9 @@ export class AddHoldingPage {
         let holding = {
             crypto: this.cryptoCode,
             currency: this.displayCurrency,
-            amount: this.amountHolding || 0
+            amount: this.amountHolding || 0,
+            buyingDate: this.buyingDate,
+            initialBuyingPrice: this.initialBuyingPrice
         };
 
         this.holdingsProvider.verifyHolding(holding).subscribe((result) => {
