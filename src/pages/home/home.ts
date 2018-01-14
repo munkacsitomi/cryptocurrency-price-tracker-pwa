@@ -29,4 +29,8 @@ export class HomePage {
         this.holdingsProvider.fetchPrices(refresher);
     }
 
+    overallPosition() {
+      this.navCtrl.push('OverallPositionPage');
+    }
+
 }

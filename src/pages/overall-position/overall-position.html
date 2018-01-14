@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Overall Position</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item-group *ngIf="holdingsProvider.holdings.length">
+    <ion-item>Combined Current Price: {{holdings}}</ion-item>
+    <ion-item>Total Holdings: {{holdingsProvider.holdings.length}}</ion-item>
+    <ion-item>Total Buying Price: </ion-item>
+  </ion-item-group>
+
+</ion-content>
+
+<ion-footer padding>
+
+    <p><strong>Note:</strong> This is just a placeholder.</p>
+
+</ion-footer>

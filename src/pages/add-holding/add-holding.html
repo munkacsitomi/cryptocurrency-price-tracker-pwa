@@ -36,17 +36,17 @@
 
         <ion-item>
             <ion-label stacked>Amount Holding</ion-label>
-            <ion-input [(ngModel)]="amountHolding" type="number"></ion-input>
+            <ion-input [(ngModel)]="amountHolding" type="number" min="0"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Buying Date</ion-label>
-            <ion-input [(ngModel)]="buyingDate" type="date"></ion-input>
+            <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="buyingDate"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Initial Buying Price</ion-label>
-            <ion-input [(ngModel)]="initialBuyingPrice" type="number"></ion-input>
+            <ion-input [(ngModel)]="initialBuyingPrice" type="number" min="0"></ion-input>
         </ion-item>
 
     </ion-list>
