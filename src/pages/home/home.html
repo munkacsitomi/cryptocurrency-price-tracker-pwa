@@ -33,8 +33,16 @@
 
           <ion-item class="holding">
             <p><strong>{{holding.crypto}}/{{holding.currency}}</strong></p>
-            <p class="amount"><strong>Coins:</strong> {{holding.amount}} <strong>Value:</strong> {{holding.value}}</p>
-            <p *ngIf="holding.value > 0" class="value">{{holding.amount * holding.value}}</p>
+            <p class="holding-data"><strong>Coins:</strong> {{holding.amount}} <strong>Actual Value: </strong> {{holding.value | number}} {{holding.currency}}</p>
+            <p *ngIf="holding.buyingDate" class="holding-data"><strong>Buying Date: </strong>{{holding.buyingDate | date:'fullDate'}}</p>
+            <p *ngIf="holding.initialBuyingPrice" class="holding-data">
+              <strong>Initial Buying Price: </strong>{{holding.initialBuyingPrice | number}} {{holding.currency}}
+            </p>
+            <span *ngIf="holding.value > 0" class="results">
+              <p class="value">{{holding.amount * holding.value | number}} {{holding.currency}}</p>
+              <p *ngIf="holding.value >= holding.initialBuyingPrice && holding.initialBuyingPrice > 0" class="value profit">Calc Here</p>
+              <p *ngIf="holding.value < holding.initialBuyingPrice && holding.initialBuyingPrice > 0" class="value loss">Calc Here</p>
+            </span>
           </ion-item>
 
           <ion-item-options>

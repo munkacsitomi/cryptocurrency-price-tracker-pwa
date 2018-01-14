@@ -10,12 +10,27 @@ import { HoldingsProvider } from '../../providers/holdings/holdings';
     templateUrl: 'add-holding.html'
 })
 export class AddHoldingPage {
+    public allCryptoCodes = [{
+      name: 'Bitcoin',
+      code: 'BTC'
+    },
+    {
+      name: 'Litecoin',
+      code: 'LTC'
+    },
+    {
+      name: 'Ethereum',
+      code: 'ETH'
+    }];
+    public allDisplayCurrencies = ['USD', 'CAD', 'AUD', 'EUR'];
 
     private cryptoUnavailable: boolean = false;
     private checkingValidity: boolean = false;
     private cryptoCode: string;
     private displayCurrency: string;
     private amountHolding;
+    private buyingDate: Date;
+    private initialBuyingPrice: number;
 
     constructor(private navCtrl: NavController, private holdingsProvider: HoldingsProvider) {
 
@@ -29,7 +44,9 @@ export class AddHoldingPage {
         let holding = {
             crypto: this.cryptoCode,
             currency: this.displayCurrency,
-            amount: this.amountHolding || 0
+            amount: this.amountHolding || 0,
+            buyingDate: this.buyingDate,
+            initialBuyingPrice: this.initialBuyingPrice
         };
 
         this.holdingsProvider.verifyHolding(holding).subscribe((result) => {

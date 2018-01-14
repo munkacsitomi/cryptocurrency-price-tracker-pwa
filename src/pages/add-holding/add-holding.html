@@ -22,17 +22,31 @@
 
         <ion-item>
             <ion-label stacked>Crypto Code</ion-label>
-            <ion-input [(ngModel)]="cryptoCode" placeholder="(e.g. BTC, LTC, ETH)" type="text"></ion-input>
+            <ion-select [(ngModel)]="cryptoCode">
+              <ion-option *ngFor="let cryptoCode of allCryptoCodes" value="{{cryptoCode.code}}">{{cryptoCode.name}} ({{cryptoCode.code}})</ion-option>
+            </ion-select>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Display Currency Code</ion-label>
-            <ion-input [(ngModel)]="displayCurrency" placeholder="(e.g. USD, CAD, AUD)" type="text"></ion-input>
+            <ion-select [(ngModel)]="displayCurrency">
+              <ion-option *ngFor="let displayCurrency of allDisplayCurrencies" value="{{displayCurrency}}">{{displayCurrency}}</ion-option>
+            </ion-select>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Amount Holding</ion-label>
             <ion-input [(ngModel)]="amountHolding" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Buying Date</ion-label>
+            <ion-input [(ngModel)]="buyingDate" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Initial Buying Price</ion-label>
+            <ion-input [(ngModel)]="initialBuyingPrice" type="number"></ion-input>
         </ion-item>
 
     </ion-list>

@@ -8,7 +8,9 @@ interface Holding {
     crypto: string,
     currency: string,
     amount: number,
-    value?: number
+    value?: number,
+    buyingDate?: Date,
+    initialBuyingPrice?: number
 }
 
 @Injectable()
