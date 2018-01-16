@@ -10,7 +10,7 @@ import { HoldingsProvider } from '../../providers/holdings/holdings';
     templateUrl: 'add-holding.html'
 })
 export class AddHoldingPage {
-    public allCryptoCodes = [{
+    readonly allCryptoCodes = [{
       name: 'Bitcoin',
       code: 'BTC'
     },
@@ -22,7 +22,7 @@ export class AddHoldingPage {
       name: 'Ethereum',
       code: 'ETH'
     }];
-    public allDisplayCurrencies = ['EUR'];
+    readonly allDisplayCurrencies = ['EUR'];
 
     private cryptoUnavailable: boolean = false;
     private checkingValidity: boolean = false;
@@ -33,7 +33,6 @@ export class AddHoldingPage {
     private initialBuyingPrice: number;
 
     constructor(private navCtrl: NavController, private holdingsProvider: HoldingsProvider) {
-
     }
 
     addHolding(): void {
@@ -67,5 +66,9 @@ export class AddHoldingPage {
         });
 
     }
+
+    // This is a workaround because the ion-input converts numbers to string
+    // ref.: https://github.com/ionic-team/ionic/issues/7121
+    convertToNumber(event):number { return +event; }
 
 }
