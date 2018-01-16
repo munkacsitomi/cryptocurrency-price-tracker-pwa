@@ -41,11 +41,10 @@
             </p>
             <span *ngIf="holding.value > 0" class="results">
               <p class="value">{{holding.amount * holding.value | number}} {{holding.currency}}</p>
-              <p *ngIf="(holding.value * holding.amount) >= holding.initialBuyingPrice && holding.initialBuyingPrice > 0" class="value profit">
-                {{(holding.value * holding.amount) / holding.initialBuyingPrice | percent}}
-              </p>
-              <p *ngIf="(holding.value * holding.amount) < holding.initialBuyingPrice && holding.initialBuyingPrice > 0" class="value loss">
-                {{holding.initialBuyingPrice / (holding.value * holding.amount) | percent}}
+              <p *ngIf="holding.initialBuyingPrice > 0"
+                class="value"
+                [ngClass]="((holding.value * holding.amount) >= holding.initialBuyingPrice)?'profit':'loss'">
+                {{holding.initialBuyingPrice | percentageIncreaseCalc:holding.value:holding.amount}}
               </p>
             </span>
           </ion-item>
