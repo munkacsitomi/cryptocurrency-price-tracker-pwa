@@ -22,7 +22,7 @@ export class AddHoldingPage {
       name: 'Ethereum',
       code: 'ETH'
     }];
-    public allDisplayCurrencies = ['USD', 'CAD', 'AUD', 'EUR'];
+    public allDisplayCurrencies = ['EUR'];
 
     private cryptoUnavailable: boolean = false;
     private checkingValidity: boolean = false;

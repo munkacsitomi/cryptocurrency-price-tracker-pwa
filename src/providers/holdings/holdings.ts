@@ -42,13 +42,17 @@ export class HoldingsProvider {
         this.storage.set('cryptoHoldings', this.holdings);
     }
 
-    loadHoldings(): void {
+    loadHoldings(cb?: Function): void {
 
         this.storage.get('cryptoHoldings').then(holdings => {
 
             if(holdings !== null){
                 this.holdings = holdings;
                 this.fetchPrices();
+            }
+
+            if (!!cb) {
+                cb();
             }
         });
 
@@ -74,7 +78,7 @@ export class HoldingsProvider {
 
             results.forEach((result: any, index) => {
 
-                this.holdings[index].value = result.ticker.price;
+                this.holdings[index].value = parseFloat(result.ticker.price);
 
             });
 

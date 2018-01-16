@@ -8,11 +8,27 @@ import { HoldingsProvider } from '../../providers/holdings/holdings';
   templateUrl: 'overall-position.html',
 })
 export class OverallPositionPage {
+  public combinedCurrentPrice: number = 0;
+  public totalBuyingPrice: number = 0;
+  public displayCurrency: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private holdingsProvider: HoldingsProvider) {
   }
 
   ionViewDidLoad() {
-    this.holdingsProvider.loadHoldings();
+    this.holdingsProvider.loadHoldings(() => {
+      this.sumPrices();
+    });
+  }
+
+  addHolding(): void {
+    this.navCtrl.push('AddHoldingPage');
+  }
+
+  private sumPrices() {
+    for (const holding of this.holdingsProvider.holdings) {
+      this.combinedCurrentPrice += (holding.value * holding.amount);
+      this.totalBuyingPrice += holding.initialBuyingPrice;
+    }
   }
 }
