@@ -10,9 +10,9 @@
 <ion-content padding>
 
   <ion-item-group *ngIf="holdingsProvider.holdings.length">
-    <ion-item>Combined Current Price: {{combinedCurrentPrice | number}}</ion-item>
+    <ion-item>Combined Current Price: {{combinedCurrentPrice | number}} {{displayCurrency}}</ion-item>
     <ion-item>Total Holdings: {{holdingsProvider.holdings.length}}</ion-item>
-    <ion-item>Total Buying Price: {{totalBuyingPrice | number}}</ion-item>
+    <ion-item>Total Buying Price: {{totalBuyingPrice | number}} {{displayCurrency}}</ion-item>
   </ion-item-group>
 
   <div class="message" *ngIf="!holdingsProvider.holdings.length">

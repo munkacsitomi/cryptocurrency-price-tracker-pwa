@@ -17,7 +17,7 @@ export class OverallPositionPage {
 
   ionViewDidLoad() {
     this.holdingsProvider.loadHoldings(() => {
-      this.sumPrices();
+      this.sumPricesAndSetCurrency();
     });
   }
 
@@ -25,10 +25,11 @@ export class OverallPositionPage {
     this.navCtrl.push('AddHoldingPage');
   }
 
-  private sumPrices() {
+  private sumPricesAndSetCurrency() {
     for (const holding of this.holdingsProvider.holdings) {
       this.combinedCurrentPrice += (holding.value * holding.amount);
       this.totalBuyingPrice += holding.initialBuyingPrice;
+      this.displayCurrency = holding.currency;
     }
   }
 }

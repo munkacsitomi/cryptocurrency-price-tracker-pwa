@@ -14,12 +14,12 @@ export class HomePage {
         code: 0
       },
       {
-        name: '2 sec',
-        code: 2000
-      },
-      {
         name: '5 sec',
         code: 5000
+      },
+      {
+        name: '30 sec',
+        code: 30000
       },
       {
         name: '1 min',

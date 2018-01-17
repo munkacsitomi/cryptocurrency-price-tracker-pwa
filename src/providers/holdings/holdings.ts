@@ -113,8 +113,6 @@ export class HoldingsProvider {
         } else {
             this.refresherSubscription = timer.subscribe(() => {
                 this.fetchPrices();
-                console.log(refreshRate);
-                console.log(this.holdings);
             });
         }
     }
