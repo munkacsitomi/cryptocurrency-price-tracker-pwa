@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { Subscription } from 'rxjs/Subscription';
 
 interface Holding {
     crypto: string,
@@ -17,6 +18,8 @@ interface Holding {
 export class HoldingsProvider {
 
     public holdings: Holding[] = [];
+
+    private refresherSubscription: Subscription;
 
     constructor(private http: HttpClient, private storage: Storage) {
 
@@ -96,6 +99,24 @@ export class HoldingsProvider {
 
         });
 
+    }
+
+    refreshPrices(refreshRate): void {
+        const timer: Observable<number> = Observable.interval(refreshRate);
+
+        if (!!this.refresherSubscription) {
+            this.refresherSubscription.unsubscribe();
+        }
+
+        if (refreshRate == 0 && !!this.refresherSubscription) {
+            this.refresherSubscription.unsubscribe();
+        } else {
+            this.refresherSubscription = timer.subscribe(() => {
+                this.fetchPrices();
+                console.log(refreshRate);
+                console.log(this.holdings);
+            });
+        }
     }
 
 }
