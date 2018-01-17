@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Overall Position</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item-group *ngIf="holdingsProvider.holdings.length">
+    <ion-item>Combined Current Price: {{combinedCurrentPrice | number}} {{displayCurrency}}</ion-item>
+    <ion-item>Total Holdings: {{holdingsProvider.holdings.length}}</ion-item>
+    <ion-item>Total Buying Price: {{totalBuyingPrice | number}} {{displayCurrency}}</ion-item>
+  </ion-item-group>
+
+  <div class="message" *ngIf="!holdingsProvider.holdings.length">
+    <p>Please add a holding first!</p>
+
+    <button ion-button full (click)="goBack()" color="primary">Go Back To Home Page</button>
+  </div>
+
+</ion-content>
+
+<ion-footer padding>
+
+    <p><strong>Note:</strong> This is just a placeholder.</p>
+
+</ion-footer>

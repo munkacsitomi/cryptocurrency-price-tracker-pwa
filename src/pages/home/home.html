@@ -4,7 +4,8 @@
       cryptoPWA
     </ion-title>
     <ion-buttons end>
-        <button ion-button icon-only (click)="addHolding()"><ion-icon name="add"></ion-icon></button>
+      <button ion-button icon-only (click)="overallPosition()"><ion-icon name="analytics"></ion-icon></button>
+      <button ion-button icon-only (click)="addHolding()"><ion-icon name="add"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -28,20 +29,37 @@
     </ion-refresher>
 
     <ion-list no-lines>
+      <ion-item *ngIf="holdingsProvider.holdings.length">
+          <ion-label stacked>Refresh Rate</ion-label>
+          <ion-select [ngModel]="defaultRefreshRate" (ngModelChange)="defaultRefreshRate = changeRefreshRate($event)">
+            <ion-option *ngFor="let refreshRateOption of refreshRateOptions" value="{{refreshRateOption.code}}">{{refreshRateOption.name}}</ion-option>
+          </ion-select>
+      </ion-item>
 
-        <ion-item-sliding *ngFor="let holding of holdingsProvider.holdings">
+      <ion-item-sliding *ngFor="let holding of holdingsProvider.holdings">
 
-          <ion-item class="holding">
-            <p><strong>{{holding.crypto}}/{{holding.currency}}</strong></p>
-            <p class="amount"><strong>Coins:</strong> {{holding.amount}} <strong>Value:</strong> {{holding.value}}</p>
-            <p *ngIf="holding.value > 0" class="value">{{holding.amount * holding.value}}</p>
-          </ion-item>
+        <ion-item class="holding">
+          <p><strong>{{holding.crypto}}/{{holding.currency}}</strong></p>
+          <p class="holding-data"><strong>Coins:</strong> {{holding.amount}} <strong>Actual Value: </strong> {{holding.value | number}} {{holding.currency}}</p>
+          <p *ngIf="holding.buyingDate" class="holding-data"><strong>Buying Date: </strong>{{holding.buyingDate | date:'fullDate'}}</p>
+          <p *ngIf="holding.initialBuyingPrice" class="holding-data">
+            <strong>Initial Buying Price: </strong>{{holding.initialBuyingPrice | number}} {{holding.currency}}
+          </p>
+          <span *ngIf="holding.value > 0" class="results">
+            <p class="value">{{holding.amount * holding.value | number}} {{holding.currency}}</p>
+            <p *ngIf="holding.initialBuyingPrice > 0"
+              class="value"
+              [ngClass]="((holding.value * holding.amount) >= holding.initialBuyingPrice)?'profit':'loss'">
+              {{holding.initialBuyingPrice | percentageIncreaseCalc:holding.value:holding.amount}}
+            </p>
+          </span>
+        </ion-item>
 
-          <ion-item-options>
-            <button ion-button icon-only color="danger" (click)="holdingsProvider.removeHolding(holding)"><ion-icon name="trash"></ion-icon></button>
-          </ion-item-options>
+        <ion-item-options>
+          <button ion-button icon-only color="danger" (click)="holdingsProvider.removeHolding(holding)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
 
-        </ion-item-sliding>
+      </ion-item-sliding>
 
     </ion-list>
 
