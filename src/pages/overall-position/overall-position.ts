@@ -21,8 +21,8 @@ export class OverallPositionPage {
     });
   }
 
-  addHolding(): void {
-    this.navCtrl.push('AddHoldingPage');
+  goBack(): void {
+    this.navCtrl.pop();
   }
 
   private sumPricesAndSetCurrency() {
